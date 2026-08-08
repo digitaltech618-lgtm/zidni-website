@@ -7,16 +7,15 @@
 <meta name="description" content="Zidni is an AI Work OS built for real estate sales and recovery teams. Manage leads, members, follow-ups and recovery from one intelligent platform.">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, sans-serif;
     background: #FFFFFF;
     color: #111827;
+    -webkit-font-smoothing: antialiased;
   }
-
   a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -26,236 +25,189 @@
     }
   }
 
-  /* =========================================================
-     HERO
-  ========================================================= */
-  section.hero {
-    padding: 64px 20px 80px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
-  }
-
-  .hero-badge {
+  /* ============ Shared structural signature: eyebrow with tick ============ */
+  .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: #EEF2FF;
-    color: #4F46E5;
-    font-size: 12.5px;
+    gap: 8px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 7px 14px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 500ms ease-out 60ms forwards;
-  }
-
-  .hero-headline {
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: #111827;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     margin-bottom: 18px;
-    opacity: 0;
-    animation: fadeUp 500ms ease-out 140ms forwards;
   }
-  .hero-headline .accent { color: #4F46E5; }
-
-  .hero-sub {
-    font-size: 16.5px;
-    color: #6B7280;
-    line-height: 1.6;
-    max-width: 480px;
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 500ms ease-out 220ms forwards;
-  }
-
-  .hero-ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 500ms ease-out 300ms forwards;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #4F46E5;
-    color: #FFFFFF;
-    font-size: 14.5px;
-    font-weight: 600;
-    padding: 13px 26px;
-    border-radius: 12px;
-    text-decoration: none;
-    min-height: 48px;
-    transition: transform 150ms ease, box-shadow 150ms ease;
-  }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(79,70,229,0.25); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFFFFF;
-    color: #4F46E5;
-    font-size: 14.5px;
-    font-weight: 600;
-    padding: 13px 26px;
-    border-radius: 12px;
-    border: 1.5px solid #4F46E5;
-    text-decoration: none;
-    min-height: 48px;
-    transition: background 150ms ease;
-  }
-  .btn-secondary:hover { background: #EEF2FF; }
-
-  /* Hero product preview mockup */
-  .hero-preview-wrap {
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 600ms ease-out 380ms forwards;
-  }
-
-  .hero-preview {
-    background: #F8FAFC;
-    border: 1px solid #E5E7EB;
-    border-radius: 20px;
-    padding: 22px;
-    box-shadow: 0 24px 48px rgba(17, 24, 39, 0.10);
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  .hp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .hp-title { font-size: 15px; font-weight: 700; color: #111827; }
-  .hp-sub { font-size: 11.5px; color: #9CA3AF; }
-
-  .hp-task {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 13px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .hp-task-icon {
-    width: 30px; height: 30px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
+  .eyebrow::before {
+    content: "";
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
     flex-shrink: 0;
   }
+  .eyebrow.tone-indigo { color: #4F46E5; }
+  .eyebrow.tone-muted { color: #9CA3AF; }
+
+  .section-head {
+    max-width: 640px;
+  }
+  .section-head.centered { margin: 0 auto; text-align: center; }
+  .section-head.centered .eyebrow { justify-content: center; }
+  .section-head h2 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.18;
+    color: #111827;
+  }
+  .section-head p {
+    font-size: 16px;
+    color: #6B7280;
+    line-height: 1.65;
+    margin-top: 16px;
+  }
+  @media (min-width: 640px) { .section-head h2 { font-size: 34px; } }
+  @media (min-width: 900px) { .section-head h2 { font-size: 38px; } }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #4F46E5; color: #FFFFFF; font-size: 14.5px; font-weight: 600;
+    padding: 13px 26px; border-radius: 10px; text-decoration: none; min-height: 48px;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    box-shadow: 0 1px 2px rgba(17,24,39,0.06);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(79,70,229,0.28); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #FFFFFF; color: #4F46E5; font-size: 14.5px; font-weight: 600;
+    padding: 13px 26px; border-radius: 10px; border: 1.5px solid #E0E3FB; text-decoration: none; min-height: 48px;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+  .btn-secondary:hover { background: #F5F5FF; border-color: #C7D2FE; }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  section.hero { padding: 72px 20px 88px; max-width: 1280px; margin: 0 auto; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #EEF2FF; color: #4F46E5; font-size: 12.5px; font-weight: 700;
+    padding: 7px 14px; border-radius: 20px; margin-bottom: 22px;
+    opacity: 0; animation: fadeUp 500ms ease-out 60ms forwards;
+  }
+  .hero-headline {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.14;
+    color: #111827; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 500ms ease-out 140ms forwards;
+  }
+  .hero-headline .accent { color: #4F46E5; }
+  .hero-sub {
+    font-size: 17px; color: #6B7280; line-height: 1.65; max-width: 480px; margin-bottom: 30px;
+    opacity: 0; animation: fadeUp 500ms ease-out 220ms forwards;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; opacity: 0; animation: fadeUp 500ms ease-out 300ms forwards; }
+
+  .hero-preview-wrap { position: relative; opacity: 0; animation: fadeUp 600ms ease-out 380ms forwards; }
+  .hero-preview {
+    background: #FBFBFE; border: 1px solid #ECECF5; border-radius: 22px; padding: 24px;
+    box-shadow: 0 1px 2px rgba(17,24,39,0.04), 0 30px 60px -20px rgba(17,24,39,0.18);
+    max-width: 460px; margin: 0 auto;
+  }
+  .hp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .hp-title { font-size: 15px; font-weight: 700; color: #111827; }
+  .hp-sub { font-size: 11.5px; color: #9CA3AF; }
+  .hp-task {
+    background: #FFFFFF; border: 1px solid #EFEFF5; border-radius: 12px; padding: 14px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(17,24,39,0.03);
+  }
+  .hp-task-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .hp-task-text strong { display:block; font-size: 12.5px; font-weight: 700; color:#111827; }
   .hp-task-text span { font-size: 11px; color:#9CA3AF; }
-
   .hp-ai-strip {
-    background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
-    border-radius: 12px;
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 14px;
+    background: linear-gradient(135deg, #EEF2FF, #E0E7FF); border-radius: 12px; padding: 13px 15px;
+    display: flex; align-items: center; gap: 10px; margin-top: 16px;
   }
-  .hp-ai-strip span { font-size: 12px; color: #3730A3; font-weight: 600; }
-
+  .hp-ai-strip span { font-size: 12px; color: #3730A3; font-weight: 600; line-height: 1.4; }
   .hp-float-stat {
-    position: absolute;
-    bottom: -18px;
-    right: -10px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 12px 16px;
-    box-shadow: 0 10px 24px rgba(17,24,39,0.12);
+    position: absolute; bottom: -20px; right: -8px; background: #FFFFFF; border: 1px solid #ECECF5;
+    border-radius: 12px; padding: 13px 17px; box-shadow: 0 14px 30px rgba(17,24,39,0.14);
   }
-  .hp-float-stat .label { font-size: 10px; color: #9CA3AF; text-transform: uppercase; letter-spacing: .04em; }
-  .hp-float-stat .value { font-size: 18px; font-weight: 700; color: #22C55E; }
+  .hp-float-stat .label { font-size: 10px; color: #9CA3AF; text-transform: uppercase; letter-spacing: .05em; }
+  .hp-float-stat .value { font-size: 19px; font-weight: 800; color: #16A34A; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-  @media (min-width: 640px) {
-    .hero-headline { font-size: 42px; }
-  }
+  @media (min-width: 640px) { .hero-headline { font-size: 44px; } }
   @media (min-width: 900px) {
-    section.hero { padding: 88px 40px 100px; }
-    .hero-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
-    .hero-headline { font-size: 48px; }
+    section.hero { padding: 100px 40px 116px; }
+    .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 72px; }
+    .hero-headline { font-size: 52px; }
   }
 
-  /* =========================================================
-     TRUST BAR
-  ========================================================= */
-  section.trust-bar {
-    background: #F8FAFC;
-    border-top: 1px solid #E5E7EB;
-    border-bottom: 1px solid #E5E7EB;
-    padding: 56px 20px 64px;
-  }
+  /* ============================================================
+     TRUST BAR — redesigned as a slim divided strip
+  ============================================================ */
+  section.trust-bar { background: #FAFAFC; border-top: 1px solid #EEEEF3; border-bottom: 1px solid #EEEEF3; padding: 52px 20px; }
   .trust-container { max-width: 1280px; margin: 0 auto; }
-  .trust-eyebrow-wrap { text-align: center; margin-bottom: 40px; }
-  .trust-accent-bar { width: 32px; height: 3px; background: #4F46E5; border-radius: 2px; margin: 0 auto 16px; }
-  .trust-eyebrow-h { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: #111827; line-height: 1.3; max-width: 560px; margin: 0 auto; }
-  .trust-eyebrow-h .accent-word { color: #4F46E5; }
-  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 20px; max-width: 900px; margin: 0 auto; }
-  .trust-item { display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:8px; border-radius:16px; transition: transform 200ms ease; }
-  .trust-item:hover { transform: translateY(-3px); }
-  .trust-icon { width:56px; height:56px; border-radius:14px; border:1px solid #E5E7EB; background:#FFFFFF; display:flex; align-items:center; justify-content:center; transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease; }
-  .trust-item:hover .trust-icon { border-color:#4F46E5; background:#EEF2FF; box-shadow:0 4px 14px rgba(79,70,229,0.18); }
-  .trust-label { font-size:14.5px; font-weight:600; color:#111827; line-height:1.35; transition: color 200ms ease; }
-  .trust-item:hover .trust-label { color:#4F46E5; }
-  .trust-desc { font-size:12.5px; font-weight:400; color:#6B7280; line-height:1.45; max-width:160px; }
-  @media (max-width: 639px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } .trust-eyebrow-h { font-size:19px; } }
-  @media (min-width: 900px) { .trust-grid { grid-template-columns: repeat(5, 1fr); max-width:1280px; gap:24px; } }
+  .trust-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 4px;
+    border-bottom: 1px solid #ECECF3;
+  }
+  .trust-item:last-child { border-bottom: none; }
+  .trust-icon-sm {
+    width: 38px; height: 38px; border-radius: 10px; background: #EEF2FF;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .trust-copy strong { display: block; font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 2px; }
+  .trust-copy span { font-size: 12.5px; color: #6B7280; line-height: 1.45; }
 
-  /* =========================================================
+  @media (min-width: 700px) {
+    .trust-strip { grid-template-columns: repeat(5, 1fr); }
+    .trust-item {
+      flex-direction: column; align-items: flex-start; text-align: left;
+      border-bottom: none; border-right: 1px solid #ECECF3; padding: 4px 22px;
+    }
+    .trust-item:last-child { border-right: none; }
+  }
+
+  /* ============================================================
      BUSINESS PROBLEMS
-  ========================================================= */
-  section.problems { padding: 96px 20px; overflow: hidden; }
+  ============================================================ */
+  section.problems { padding: 108px 20px; overflow: hidden; }
   .problems-container { max-width: 1280px; margin: 0 auto; }
-  .problems-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
-  .problems-eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#9CA3AF; margin-bottom:14px; }
-  .problems-headline { font-size:32px; font-weight:700; letter-spacing:-0.02em; color:#111827; line-height:1.25; margin-bottom:14px; }
-  .problems-sub { font-size:16px; color:#6B7280; line-height:1.6; }
+  .problems-header { margin-bottom: 56px; }
 
-  .chaos-wrap { position: relative; max-width: 720px; margin: 0 auto 64px; height: 260px; }
-  .chaos-card { position:absolute; background:#FFFFFF; border:1px solid #E5E7EB; border-radius:14px; box-shadow:0 10px 24px rgba(17,24,39,0.08); padding:14px 16px; }
+  .chaos-wrap { position: relative; max-width: 720px; margin: 0 auto 72px; height: 260px; }
+  .chaos-card { position:absolute; background:#FFFFFF; border:1px solid #ECECF3; border-radius:14px; box-shadow:0 16px 32px rgba(17,24,39,0.08); padding:14px 16px; }
   .chaos-whatsapp { top:0; left:4%; width:240px; transform:rotate(-4deg); border-left:4px solid #22C55E; }
   .chaos-whatsapp .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
   .chaos-whatsapp .dot { width:22px; height:22px; border-radius:50%; background:#DCFCE7; display:flex; align-items:center; justify-content:center; font-size:12px; }
   .chaos-whatsapp .name { font-size:12.5px; font-weight:700; color:#111827; }
   .chaos-whatsapp .msg { font-size:12px; color:#6B7280; line-height:1.4; }
-  .chaos-whatsapp .unread { display:inline-block; margin-top:8px; font-size:10.5px; font-weight:700; color:#EF4444; }
+  .chaos-whatsapp .unread { display:inline-block; margin-top:8px; font-size:10.5px; font-weight:700; color:#DC2626; }
   .chaos-sheet { top:70px; right:2%; width:250px; transform:rotate(3deg); }
   .chaos-sheet table { width:100%; border-collapse:collapse; font-size:11px; }
-  .chaos-sheet th { text-align:left; color:#9CA3AF; font-weight:600; padding-bottom:6px; border-bottom:1px solid #E5E7EB; }
+  .chaos-sheet th { text-align:left; color:#9CA3AF; font-weight:600; padding-bottom:6px; border-bottom:1px solid #ECECF3; }
   .chaos-sheet td { padding:5px 0; color:#374151; border-bottom:1px solid #F3F4F6; }
-  .chaos-sheet tr.missed td { color:#EF4444; font-weight:600; }
-  .chaos-sticky { bottom:0; left:18%; width:180px; background:#FEF9C3; border:1px solid #FDE68A; transform:rotate(-2deg); box-shadow:0 8px 18px rgba(217,119,6,0.12); }
+  .chaos-sheet tr.missed td { color:#DC2626; font-weight:600; }
+  .chaos-sticky { bottom:0; left:18%; width:180px; background:#FEF9C3; border:1px solid #FDE68A; transform:rotate(-2deg); box-shadow:0 12px 24px rgba(217,119,6,0.14); }
   .chaos-sticky .sticky-title { font-size:11px; font-weight:700; color:#92400E; margin-bottom:4px; }
   .chaos-sticky .sticky-text { font-size:12px; color:#78350F; line-height:1.4; }
 
-  .problems-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-  .problem-card { background:#F8FAFC; border:1px solid #E5E7EB; border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:14px; transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
-  .problem-card:hover { border-color:#FCA5A5; box-shadow:0 8px 20px rgba(239,68,68,0.08); transform:translateY(-2px); }
-  .problem-icon { width:44px; height:44px; border-radius:12px; background:#FEF2F2; display:flex; align-items:center; justify-content:center; }
-  .problem-title { font-size:16.5px; font-weight:700; color:#111827; line-height:1.35; }
-  .problem-desc { font-size:14px; color:#6B7280; line-height:1.55; }
+  .problems-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:#ECECF3; border:1px solid #ECECF3; border-radius:18px; overflow:hidden; }
+  .problem-card { background:#FFFFFF; padding:28px 26px; display:flex; flex-direction:column; gap:14px; transition: background 200ms ease; }
+  .problem-card:hover { background:#FAFAFC; }
+  .problem-icon { width:40px; height:40px; border-radius:11px; background:#FEF2F2; display:flex; align-items:center; justify-content:center; }
+  .problem-title { font-size:16px; font-weight:700; color:#111827; line-height:1.35; }
+  .problem-desc { font-size:13.5px; color:#6B7280; line-height:1.58; }
   .problem-card:last-child { grid-column: 1 / -1; }
 
   @media (max-width: 640px) {
@@ -264,144 +216,128 @@
     .chaos-sheet { width:200px; top:100px; right:0; }
     .chaos-sticky { width:160px; bottom:0; left:10%; }
   }
-  @media (min-width: 640px) { .problems-headline { font-size:36px; } }
   @media (min-width: 900px) {
-    .problems-grid { grid-template-columns: repeat(6,1fr); }
-    .problem-card:nth-child(1), .problem-card:nth-child(2), .problem-card:nth-child(3) { grid-column: span 2; }
-    .problem-card:nth-child(4), .problem-card:nth-child(5) { grid-column: span 3; }
-    .problem-card:last-child { grid-column: span 3; }
-    .problems-headline { font-size:40px; }
+    .problems-grid { grid-template-columns: repeat(5,1fr); }
+    .problem-card:last-child { grid-column: auto; }
   }
 
-  /* =========================================================
-     WHY TRADITIONAL CRMS FAIL
-  ========================================================= */
-  section.compare { padding: 96px 20px; }
+  /* ============================================================
+     WHY TRADITIONAL CRMS FAIL — with check/x icons
+  ============================================================ */
+  section.compare { padding: 108px 20px; background:#FAFAFC; }
   .compare-container { max-width: 1000px; margin: 0 auto; }
-  .compare-header { text-align:center; max-width:620px; margin:0 auto 48px; }
-  .compare-eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#4F46E5; margin-bottom:14px; }
-  .compare-headline { font-size:32px; font-weight:700; letter-spacing:-0.02em; color:#111827; line-height:1.25; margin-bottom:14px; }
-  .compare-sub { font-size:16px; color:#6B7280; line-height:1.6; }
+  .compare-header { margin-bottom: 52px; }
 
-  .compare-table { border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; box-shadow:0 4px 16px rgba(17,24,39,0.04); }
-  .compare-head { display:grid; grid-template-columns:1.4fr 1fr 1fr; }
-  .compare-head > div { padding:16px 18px; font-size:13px; font-weight:700; }
+  .compare-table { background:#FFFFFF; border:1px solid #ECECF3; border-radius:18px; overflow:hidden; box-shadow: 0 1px 2px rgba(17,24,39,0.03); }
+  .compare-head { display:grid; grid-template-columns:1.5fr 1fr 1fr; border-bottom: 1px solid #ECECF3; }
+  .compare-head > div { padding:16px 20px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; }
   .head-blank { background:#FFFFFF; }
-  .head-traditional { background:#F8FAFC; color:#6B7280; text-align:center; }
+  .head-traditional { background:#FAFAFC; color:#9CA3AF; text-align:center; }
   .head-zidni { background:#4F46E5; color:#FFFFFF; text-align:center; }
-  .compare-row { display:grid; grid-template-columns:1.4fr 1fr 1fr; border-top:1px solid #E5E7EB; }
-  .row-label { padding:18px; font-size:14px; font-weight:600; color:#111827; display:flex; align-items:center; background:#FFFFFF; }
-  .row-cell { padding:18px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:13px; line-height:1.4; }
-  .cell-traditional { background:#FAFAFA; color:#9CA3AF; }
-  .cell-zidni { background:#EEF2FF; color:#3730A3; font-weight:600; }
+  .compare-row { display:grid; grid-template-columns:1.5fr 1fr 1fr; }
+  .compare-row + .compare-row { border-top:1px solid #F1F1F6; }
+  .row-label { padding:18px 20px; font-size:13.5px; font-weight:600; color:#111827; display:flex; align-items:center; }
+  .row-cell { padding:16px 18px; display:flex; align-items:center; justify-content:center; gap:8px; text-align:left; font-size:12.5px; line-height:1.4; }
+  .cell-traditional { color:#9CA3AF; }
+  .cell-zidni { background:#F8F8FF; color:#3730A3; font-weight:600; }
+  .row-icon { width:16px; height:16px; flex-shrink:0; }
 
   @media (max-width: 700px) {
     .compare-head { display:none; }
-    .compare-row { grid-template-columns:1fr; border-top:none; border-bottom:1px solid #E5E7EB; padding:16px 0; }
-    .row-label { padding:0 4px 10px; font-size:15px; }
-    .row-cell { justify-content:flex-start; text-align:left; padding:8px 4px; border-radius:8px; margin-bottom:4px; }
-    .row-cell::before { content: attr(data-label); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-right:8px; opacity:.7; min-width:76px; }
+    .compare-row { grid-template-columns:1fr; border-top:1px solid #F1F1F6 !important; padding:16px 18px; }
+    .row-label { padding:0 0 10px; font-size:15px; }
+    .row-cell { justify-content:flex-start; padding:8px 0; }
+    .cell-zidni { background:none; padding-left: 10px; border-left: 3px solid #4F46E5; }
+    .row-cell::before { content: attr(data-label); font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#9CA3AF; min-width:78px; }
+    .cell-zidni::before { color: #4F46E5; }
   }
-  @media (min-width: 640px) { .compare-headline { font-size:36px; } }
-  @media (min-width: 900px) { .compare-headline { font-size:40px; } }
 
-  /* =========================================================
+  /* ============================================================
      WHY ZIDNI
-  ========================================================= */
-  section.why-zidni { padding: 96px 20px; background: #F8FAFC; }
+  ============================================================ */
+  section.why-zidni { padding: 108px 20px; }
   .wz-container { max-width: 1280px; margin: 0 auto; }
-  .wz-header { text-align:center; max-width:620px; margin:0 auto 56px; }
-  .wz-eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#4F46E5; margin-bottom:14px; }
-  .wz-accent-bar { width:32px; height:3px; background:#4F46E5; border-radius:2px; margin:0 auto 16px; }
-  .wz-headline { font-size:32px; font-weight:700; letter-spacing:-0.02em; color:#111827; line-height:1.25; margin-bottom:14px; }
-  .wz-sub { font-size:16px; color:#6B7280; line-height:1.6; }
-  .wz-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-  .wz-card { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:12px; transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease; }
-  .wz-card:hover { transform:translateY(-3px); box-shadow:0 10px 24px rgba(79,70,229,0.10); border-color:#C7D2FE; }
-  .wz-icon { width:48px; height:48px; border-radius:12px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; }
-  .wz-title { font-size:16.5px; font-weight:700; color:#111827; line-height:1.35; }
-  .wz-desc { font-size:13.5px; color:#6B7280; line-height:1.55; }
-  .wz-card.featured { grid-column: span 2; background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%); color:#FFFFFF; flex-direction:row; align-items:center; gap:20px; }
-  .wz-card.featured .wz-icon { background: rgba(255,255,255,0.15); }
+  .wz-header { margin-bottom: 56px; }
+  .wz-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .wz-card {
+    background:#FFFFFF; border:1px solid #ECECF3; border-radius:16px; padding:26px;
+    display:flex; flex-direction:column; gap:12px;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+  .wz-card:hover { transform:translateY(-3px); box-shadow:0 16px 32px rgba(79,70,229,0.12); border-color:#DDE1FB; }
+  .wz-icon { width:46px; height:46px; border-radius:12px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; }
+  .wz-title { font-size:16px; font-weight:700; color:#111827; line-height:1.35; }
+  .wz-desc { font-size:13.5px; color:#6B7280; line-height:1.58; }
+  .wz-card.featured {
+    grid-column: span 2; background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%); color:#FFFFFF;
+    flex-direction:row; align-items:center; gap:22px;
+    box-shadow: 0 20px 40px -12px rgba(79,70,229,0.4);
+  }
+  .wz-card.featured .wz-icon { background: rgba(255,255,255,0.16); }
   .wz-card.featured .wz-title { color:#FFFFFF; font-size:19px; }
   .wz-card.featured .wz-desc { color:#E0E7FF; }
+
   @media (max-width: 640px) { .wz-grid { grid-template-columns:1fr; } .wz-card.featured { grid-column: span 1; flex-direction:column; align-items:flex-start; } }
-  @media (min-width: 640px) { .wz-headline { font-size:36px; } }
-  @media (min-width: 900px) { .wz-grid { grid-template-columns:repeat(3,1fr); } .wz-card.featured { grid-column: span 3; } .wz-headline { font-size:40px; } }
+  @media (min-width: 900px) { .wz-grid { grid-template-columns:repeat(3,1fr); } .wz-card.featured { grid-column: span 3; } }
 
-  /* =========================================================
+  /* ============================================================
      CALLING QUEUE
-  ========================================================= */
-  section.calling-queue { padding: 96px 20px; }
-  .cq-container { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
-  .cq-content .cq-eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#4F46E5; margin-bottom:14px; }
-  .cq-content .cq-headline { font-size:32px; font-weight:700; letter-spacing:-0.02em; color:#111827; line-height:1.25; margin-bottom:14px; }
-  .cq-content .cq-sub { font-size:16px; color:#6B7280; line-height:1.6; margin-bottom:28px; max-width:480px; }
-  .cq-benefits { display:flex; flex-direction:column; gap:16px; margin-bottom:32px; }
-  .cq-benefit { display:flex; align-items:flex-start; gap:12px; }
-  .cq-benefit-icon { width:28px; height:28px; border-radius:8px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  ============================================================ */
+  section.calling-queue { padding: 108px 20px; background:#FAFAFC; }
+  .cq-container { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:52px; align-items:center; }
+  .cq-content .cq-sub { font-size:16px; color:#6B7280; line-height:1.65; margin-bottom:30px; max-width:460px; }
+  .cq-benefits { display:flex; flex-direction:column; gap:18px; margin-bottom:34px; }
+  .cq-benefit { display:flex; align-items:flex-start; gap:13px; }
+  .cq-benefit-icon { width:26px; height:26px; border-radius:8px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
   .cq-benefit-text strong { display:block; font-size:14.5px; font-weight:700; color:#111827; margin-bottom:2px; }
-  .cq-benefit-text span { font-size:13.5px; color:#6B7280; line-height:1.5; }
+  .cq-benefit-text span { font-size:13px; color:#6B7280; line-height:1.5; }
 
-  .cq-mockup { background:#F8FAFC; border:1px solid #E5E7EB; border-radius:20px; padding:24px; box-shadow:0 20px 40px rgba(17,24,39,0.08); max-width:420px; margin:0 auto; width:100%; }
-  .cq-mock-badge { display:inline-block; background:#EEF2FF; color:#4F46E5; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; margin-bottom:14px; }
-  .cq-mock-card { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:14px; padding:18px; margin-bottom:14px; }
+  .cq-mockup { background:#FFFFFF; border:1px solid #ECECF3; border-radius:20px; padding:24px; box-shadow: 0 1px 2px rgba(17,24,39,0.04), 0 30px 60px -20px rgba(17,24,39,0.16); max-width:420px; margin:0 auto; width:100%; }
+  .cq-mock-badge { display:inline-block; background:#EEF2FF; color:#4F46E5; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; margin-bottom:16px; letter-spacing:0.02em; }
+  .cq-mock-card { background:#FAFAFC; border:1px solid #ECECF3; border-radius:14px; padding:18px; margin-bottom:14px; }
   .cq-mock-name { font-size:17px; font-weight:700; color:#111827; }
-  .cq-mock-id { font-size:12px; color:#9CA3AF; margin-bottom:10px; }
-  .cq-mock-outstanding { font-size:20px; font-weight:700; color:#F59E0B; margin-bottom:4px; }
-  .cq-mock-outstanding-label { font-size:11px; color:#9CA3AF; text-transform:uppercase; letter-spacing:.04em; }
-  .cq-mock-call-btn { display:flex; align-items:center; justify-content:center; gap:8px; background:#22C55E; color:#FFFFFF; font-size:14px; font-weight:700; padding:13px; border-radius:10px; margin-bottom:10px; }
-  .cq-mock-secondary-row { display:flex; gap:10px; margin-bottom:14px; }
-  .cq-mock-secondary-btn { flex:1; text-align:center; background:#F8FAFC; border:1px solid #E5E7EB; color:#374151; font-size:12.5px; font-weight:600; padding:10px; border-radius:8px; }
-  .cq-mock-disposition-label { font-size:11px; font-weight:700; color:#9CA3AF; text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px; }
+  .cq-mock-id { font-size:12px; color:#9CA3AF; margin-bottom:12px; }
+  .cq-mock-outstanding { font-size:21px; font-weight:800; color:#D97706; margin-bottom:4px; }
+  .cq-mock-outstanding-label { font-size:10.5px; color:#9CA3AF; text-transform:uppercase; letter-spacing:.05em; }
+  .cq-mock-call-btn { display:flex; align-items:center; justify-content:center; gap:8px; background:#16A34A; color:#FFFFFF; font-size:14px; font-weight:700; padding:14px; border-radius:10px; margin-bottom:10px; }
+  .cq-mock-secondary-row { display:flex; gap:10px; margin-bottom:16px; }
+  .cq-mock-secondary-btn { flex:1; text-align:center; background:#FFFFFF; border:1px solid #ECECF3; color:#374151; font-size:12.5px; font-weight:600; padding:10px; border-radius:8px; }
+  .cq-mock-disposition-label { font-size:10.5px; font-weight:700; color:#9CA3AF; text-transform:uppercase; letter-spacing:.05em; margin-bottom:9px; }
   .cq-mock-chip-row { display:flex; gap:8px; flex-wrap:wrap; }
-  .cq-mock-chip { background:#F8FAFC; border:1px solid #E5E7EB; color:#6B7280; font-size:11.5px; font-weight:600; padding:6px 12px; border-radius:20px; }
+  .cq-mock-chip { background:#FAFAFC; border:1px solid #ECECF3; color:#6B7280; font-size:11.5px; font-weight:600; padding:6px 13px; border-radius:20px; }
   .cq-mock-chip.active { background:#4F46E5; color:#FFFFFF; border-color:#4F46E5; }
 
-  @media (min-width: 640px) { .cq-content .cq-headline { font-size:36px; } }
-  @media (min-width: 900px) {
-    .cq-container { grid-template-columns:1fr 1fr; gap:64px; }
-    .cq-content .cq-headline { font-size:40px; }
-    .cq-mockup { margin:0; }
-  }
+  @media (min-width: 900px) { .cq-container { grid-template-columns:1fr 1fr; gap:68px; } .cq-mockup { margin:0; } }
 
-  /* =========================================================
+  /* ============================================================
      SHARED LEAD POOL
-  ========================================================= */
-  section.lead-pool { padding: 96px 20px; background:#F8FAFC; }
-  .lp-container { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
+  ============================================================ */
+  section.lead-pool { padding: 108px 20px; }
+  .lp-container { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:52px; align-items:center; }
   .lp-mockup-order { order:-1; }
-  .lp-content .lp-eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#4F46E5; margin-bottom:14px; }
-  .lp-content .lp-headline { font-size:32px; font-weight:700; letter-spacing:-0.02em; color:#111827; line-height:1.25; margin-bottom:14px; }
-  .lp-content .lp-sub { font-size:16px; color:#6B7280; line-height:1.6; margin-bottom:28px; max-width:480px; }
-  .lp-benefits { display:flex; flex-direction:column; gap:16px; margin-bottom:32px; }
-  .lp-benefit { display:flex; align-items:flex-start; gap:12px; }
-  .lp-benefit-icon { width:28px; height:28px; border-radius:8px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .lp-content .lp-sub { font-size:16px; color:#6B7280; line-height:1.65; margin-bottom:30px; max-width:460px; }
+  .lp-benefits { display:flex; flex-direction:column; gap:18px; margin-bottom:34px; }
+  .lp-benefit { display:flex; align-items:flex-start; gap:13px; }
+  .lp-benefit-icon { width:26px; height:26px; border-radius:8px; background:#EEF2FF; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
   .lp-benefit-text strong { display:block; font-size:14.5px; font-weight:700; color:#111827; margin-bottom:2px; }
-  .lp-benefit-text span { font-size:13.5px; color:#6B7280; line-height:1.5; }
+  .lp-benefit-text span { font-size:13px; color:#6B7280; line-height:1.5; }
 
-  .lp-mockup { background:#FFFFFF; border:1px solid #E5E7EB; border-radius:20px; padding:22px; box-shadow:0 20px 40px rgba(17,24,39,0.08); max-width:440px; margin:0 auto; width:100%; }
-  .lp-mock-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .lp-mockup { background:#FAFAFC; border:1px solid #ECECF3; border-radius:20px; padding:22px; box-shadow: 0 1px 2px rgba(17,24,39,0.04), 0 30px 60px -20px rgba(17,24,39,0.16); max-width:440px; margin:0 auto; width:100%; }
+  .lp-mock-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
   .lp-mock-title { font-size:15px; font-weight:700; color:#111827; }
   .lp-mock-sub { font-size:12px; color:#9CA3AF; }
-  .lp-live { display:inline-flex; align-items:center; gap:6px; background:#ECFDF5; color:#059669; font-size:11px; font-weight:700; padding:5px 10px; border-radius:20px; }
+  .lp-live { display:inline-flex; align-items:center; gap:6px; background:#ECFDF5; color:#047857; font-size:11px; font-weight:700; padding:5px 10px; border-radius:20px; }
   .lp-live-dot { width:6px; height:6px; border-radius:50%; background:#22C55E; animation: lpPulse 1.6s ease-in-out infinite; }
   @keyframes lpPulse { 0%,100% { opacity:1; } 50% { opacity:.35; } }
-  .lp-mock-card { background:#F8FAFC; border:1px solid #E5E7EB; border-radius:12px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .lp-mock-card { background:#FFFFFF; border:1px solid #ECECF3; border-radius:12px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .lp-lead-name { font-size:13.5px; font-weight:700; color:#111827; }
   .lp-lead-meta { font-size:11.5px; color:#9CA3AF; }
   .lp-claim-btn { background:#4F46E5; color:#FFFFFF; font-size:11.5px; font-weight:700; padding:7px 14px; border-radius:8px; white-space:nowrap; }
-  .lp-mock-footer { display:flex; align-items:center; justify-content:space-between; margin-top:14px; padding-top:14px; border-top:1px solid #F3F4F6; }
-  .lp-recycle { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:#6B7280; background:#F8FAFC; border:1px solid #E5E7EB; padding:8px 12px; border-radius:8px; }
+  .lp-mock-footer { display:flex; align-items:center; justify-content:space-between; margin-top:16px; padding-top:16px; border-top:1px solid #ECECF3; }
+  .lp-recycle { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:#6B7280; background:#FFFFFF; border:1px solid #ECECF3; padding:8px 12px; border-radius:8px; }
   .lp-recycle-badge { background:#FEE2E2; color:#DC2626; font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; }
 
-  @media (min-width: 640px) { .lp-content .lp-headline { font-size:36px; } }
-  @media (min-width: 900px) {
-    .lp-container { grid-template-columns:1fr 1fr; gap:64px; }
-    .lp-mockup-order { order:0; }
-    .lp-content .lp-headline { font-size:40px; }
-    .lp-mockup { margin:0; }
-  }
+  @media (min-width: 900px) { .lp-container { grid-template-columns:1fr 1fr; gap:68px; } .lp-mockup-order { order:0; } .lp-mockup { margin:0; } }
 </style>
 </head>
 <body>
@@ -412,7 +348,7 @@
     <div class="hero-content">
       <span class="hero-badge">🇵🇰 Pakistan's First AI Work OS</span>
       <h1 class="hero-headline">Aaj kya karna hai —<br><span class="accent">Zidni bata dega.</span></h1>
-      <p class="hero-sub">Zidni is the AI Work OS for real estate sales teams. It guides every agent's day, so nothing gets missed and nothing gets forgotten.</p>
+      <p class="hero-sub">The AI Work OS for real estate sales teams. It guides every agent's day, so nothing gets missed and nothing gets forgotten.</p>
       <div class="hero-ctas">
         <a href="#" class="btn-primary">Request Demo</a>
         <a href="#" class="btn-secondary">Watch Product Tour</a>
@@ -422,52 +358,26 @@
     <div class="hero-preview-wrap">
       <div class="hero-preview" role="img" aria-label="Product preview showing today's work panel with task cards and an AI assistant suggestion">
         <div class="hp-header">
-          <div>
-            <div class="hp-title">Today's Work</div>
-            <div class="hp-sub">3 items need attention</div>
-          </div>
+          <div><div class="hp-title">Today's Work</div><div class="hp-sub">3 items need attention</div></div>
         </div>
-
         <div class="hp-task">
-          <div class="hp-task-icon" style="background:#EEF2FF;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-          </div>
-          <div class="hp-task-text">
-            <strong>Call reminder — Ali Hassan</strong>
-            <span>Promised callback · 3:00 PM</span>
-          </div>
+          <div class="hp-task-icon" style="background:#EEF2FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
+          <div class="hp-task-text"><strong>Call reminder — Ali Hassan</strong><span>Promised callback · 3:00 PM</span></div>
         </div>
-
         <div class="hp-task">
-          <div class="hp-task-icon" style="background:#FEF3C7;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          </div>
-          <div class="hp-task-text">
-            <strong>Recovery due — Sara Khan</strong>
-            <span>PKR 1,240,000 outstanding</span>
-          </div>
+          <div class="hp-task-icon" style="background:#FEF3C7;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div class="hp-task-text"><strong>Recovery due — Bilal Ahmed</strong><span class="num">PKR 1,240,000 outstanding</span></div>
         </div>
-
         <div class="hp-task">
-          <div class="hp-task-icon" style="background:#DCFCE7;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-          </div>
-          <div class="hp-task-text">
-            <strong>New lead — Bilal Ahmed</strong>
-            <span>Facebook · Waiting in pool</span>
-          </div>
+          <div class="hp-task-icon" style="background:#DCFCE7;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div class="hp-task-text"><strong>New lead — Aoun Abbas</strong><span>Facebook · Waiting in pool</span></div>
         </div>
-
         <div class="hp-ai-strip">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
           <span>Zid suggests: Call Ali Hassan first — highest recovery value.</span>
         </div>
       </div>
-
-      <div class="hp-float-stat">
-        <div class="label">Collections Today</div>
-        <div class="value">PKR 480K</div>
-      </div>
+      <div class="hp-float-stat"><div class="label">Collections Today</div><div class="value num">PKR 480K</div></div>
     </div>
   </div>
 </section>
@@ -475,35 +385,26 @@
 <!-- ============ TRUST BAR ============ -->
 <section class="trust-bar" aria-label="Trust indicators">
   <div class="trust-container">
-    <div class="trust-eyebrow-wrap">
-      <div class="trust-accent-bar"></div>
-      <h2 class="trust-eyebrow-h">Purpose-Built for <span class="accent-word">Modern Real Estate Teams</span></h2>
-    </div>
-    <div class="trust-grid">
+    <div class="trust-strip">
       <div class="trust-item">
-        <div class="trust-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
-        <span class="trust-label">Mobile-First Experience</span>
-        <span class="trust-desc">Work from anywhere with a fast, intuitive mobile interface.</span>
+        <div class="trust-icon-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+        <div class="trust-copy"><strong>Mobile-First</strong><span>Fast, intuitive interface</span></div>
       </div>
       <div class="trust-item">
-        <div class="trust-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
-        <span class="trust-label">WhatsApp-Native Collaboration</span>
-        <span class="trust-desc">Manage leads and follow-ups right where your team already talks.</span>
+        <div class="trust-icon-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
+        <div class="trust-copy"><strong>WhatsApp-Native</strong><span>Where your team already talks</span></div>
       </div>
       <div class="trust-item">
-        <div class="trust-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg></div>
-        <span class="trust-label">AI-Powered Automation</span>
-        <span class="trust-desc">Automate repetitive tasks and accelerate every follow-up.</span>
+        <div class="trust-icon-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+        <div class="trust-copy"><strong>AI-Powered</strong><span>Every follow-up, automated</span></div>
       </div>
       <div class="trust-item">
-        <div class="trust-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <span class="trust-label">Enterprise-Grade Security</span>
-        <span class="trust-desc">Role-based access and encryption protect every record.</span>
+        <div class="trust-icon-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="trust-copy"><strong>Enterprise Security</strong><span>Role-based, encrypted</span></div>
       </div>
       <div class="trust-item">
-        <div class="trust-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-        <span class="trust-label">Scalable Multi-Tenant Architecture</span>
-        <span class="trust-desc">Built to grow with agencies of any size, securely isolated.</span>
+        <div class="trust-icon-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <div class="trust-copy"><strong>Multi-Tenant</strong><span>Scales with your agency</span></div>
       </div>
     </div>
   </div>
@@ -512,10 +413,10 @@
 <!-- ============ BUSINESS PROBLEMS ============ -->
 <section class="problems" aria-label="Business problems">
   <div class="problems-container">
-    <div class="problems-header">
-      <span class="problems-eyebrow">The Old Way</span>
-      <h2 class="problems-headline">Sound Familiar?</h2>
-      <p class="problems-sub">Leads in WhatsApp. Payments in a spreadsheet. Follow-ups on a sticky note. Nothing talks to anything.</p>
+    <div class="section-head centered problems-header">
+      <span class="eyebrow tone-muted">The Old Way</span>
+      <h2>Sound Familiar?</h2>
+      <p>Leads in WhatsApp. Payments in a spreadsheet. Follow-ups on a sticky note. Nothing talks to anything.</p>
     </div>
 
     <div class="chaos-wrap" role="img" aria-label="Scattered tools showing WhatsApp messages, a spreadsheet, and a sticky note that don't talk to each other">
@@ -527,40 +428,40 @@
       <div class="chaos-card chaos-sheet">
         <table>
           <tr><th>Lead</th><th>Status</th><th>Next</th></tr>
-          <tr><td>S. Bilal</td><td>New</td><td>—</td></tr>
-          <tr class="missed"><td>F. Khan</td><td>Follow-up</td><td>Missed</td></tr>
-          <tr><td>A. Raza</td><td>Interested</td><td>—</td></tr>
+          <tr><td>Sana Bilal</td><td>New</td><td>—</td></tr>
+          <tr class="missed"><td>Farhan Khan</td><td>Follow-up</td><td>Missed</td></tr>
+          <tr><td>Ahmed Raza</td><td>Interested</td><td>—</td></tr>
         </table>
       </div>
       <div class="chaos-card chaos-sticky">
         <div class="sticky-title">📌 Reminder</div>
-        <div class="sticky-text">Call back Kashif re: installment — forgot yesterday!</div>
+        <div class="sticky-text">Call back Kashif regarding installment — forgot yesterday!</div>
       </div>
     </div>
 
     <div class="problems-grid">
       <div class="problem-card">
-        <div class="problem-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9c-1.5 0-2.9-.37-4.14-1.02L3 21l1.02-4.86A8.96 8.96 0 0 1 3 12Z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/></svg></div>
+        <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9c-1.5 0-2.9-.37-4.14-1.02L3 21l1.02-4.86A8.96 8.96 0 0 1 3 12Z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/></svg></div>
         <span class="problem-title">Leads Slip Through the Cracks</span>
         <span class="problem-desc">Scattered across WhatsApp, spreadsheets and sticky notes, leads get lost before they ever convert.</span>
       </div>
       <div class="problem-card">
-        <div class="problem-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
         <span class="problem-title">Follow-Ups Fall Behind</span>
         <span class="problem-desc">Without reminders, agents forget who to call next — and warm deals go cold.</span>
       </div>
       <div class="problem-card">
-        <div class="problem-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
+        <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
         <span class="problem-title">Managers Fly Blind</span>
         <span class="problem-desc">No real-time view into what the team is actually doing on any given day.</span>
       </div>
       <div class="problem-card">
-        <div class="problem-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
         <span class="problem-title">Recovery Has No Priority</span>
         <span class="problem-desc">Recovery teams can't tell which overdue payment needs attention first.</span>
       </div>
       <div class="problem-card">
-        <div class="problem-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="7" y1="14" x2="11" y2="14"/></svg></div>
+        <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="7" y1="14" x2="11" y2="14"/></svg></div>
         <span class="problem-title">Generic CRMs Don't Fit</span>
         <span class="problem-desc">Built for global sales teams, not for how real estate actually works locally.</span>
       </div>
@@ -571,10 +472,10 @@
 <!-- ============ WHY TRADITIONAL CRMS FAIL ============ -->
 <section class="compare" aria-label="Why traditional CRMs fail">
   <div class="compare-container">
-    <div class="compare-header">
-      <span class="compare-eyebrow">The Gap</span>
-      <h2 class="compare-headline">Traditional CRMs Weren't Built for This</h2>
-      <p class="compare-sub">Most CRMs were designed for global B2B sales teams — not Pakistani real estate, WhatsApp-first agents, and installment recovery.</p>
+    <div class="section-head centered compare-header">
+      <span class="eyebrow tone-indigo">The Gap</span>
+      <h2>Traditional CRMs Weren't Built for This</h2>
+      <p>Most CRMs were designed for global B2B sales teams — not Pakistani real estate, WhatsApp-first agents, and installment recovery.</p>
     </div>
 
     <div class="compare-table">
@@ -583,30 +484,31 @@
         <div class="head-traditional">Traditional CRM</div>
         <div class="head-zidni">Zidni</div>
       </div>
+
       <div class="compare-row">
         <div class="row-label">Communication</div>
-        <div class="row-cell cell-traditional" data-label="Traditional">Built around email-first workflows</div>
-        <div class="row-cell cell-zidni" data-label="Zidni">WhatsApp-native, built for how agents actually talk</div>
+        <div class="row-cell cell-traditional" data-label="Traditional"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Email-first workflows</div>
+        <div class="row-cell cell-zidni" data-label="Zidni"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>WhatsApp-native</div>
       </div>
       <div class="compare-row">
         <div class="row-label">Daily Work</div>
-        <div class="row-cell cell-traditional" data-label="Traditional">Passive record keeping only</div>
-        <div class="row-cell cell-zidni" data-label="Zidni">AI-guided Calling Queue tells agents who's next</div>
+        <div class="row-cell cell-traditional" data-label="Traditional"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Passive record keeping</div>
+        <div class="row-cell cell-zidni" data-label="Zidni"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>AI-guided Calling Queue</div>
       </div>
       <div class="compare-row">
         <div class="row-label">Recovery</div>
-        <div class="row-cell cell-traditional" data-label="Traditional">Limited support for installment recovery</div>
-        <div class="row-cell cell-zidni" data-label="Zidni">Built-in Members Module tracks every outstanding PKR</div>
+        <div class="row-cell cell-traditional" data-label="Traditional"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Limited installment support</div>
+        <div class="row-cell cell-zidni" data-label="Zidni"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built-in Members Module</div>
       </div>
       <div class="compare-row">
         <div class="row-label">Local Fit</div>
-        <div class="row-cell cell-traditional" data-label="Traditional">Poor fit for local real estate operations</div>
-        <div class="row-cell cell-zidni" data-label="Zidni">Built for Pakistani societies, plots and payment plans</div>
+        <div class="row-cell cell-traditional" data-label="Traditional"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Poor local fit</div>
+        <div class="row-cell cell-zidni" data-label="Zidni"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built for Pakistani societies</div>
       </div>
       <div class="compare-row">
         <div class="row-label">Mobile</div>
-        <div class="row-cell cell-traditional" data-label="Traditional">Mobile experience is often secondary</div>
-        <div class="row-cell cell-zidni" data-label="Zidni">Mobile-first — built for agents in the field</div>
+        <div class="row-cell cell-traditional" data-label="Traditional"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Mobile is secondary</div>
+        <div class="row-cell cell-zidni" data-label="Zidni"><svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mobile-first, always</div>
       </div>
     </div>
   </div>
@@ -615,50 +517,41 @@
 <!-- ============ WHY ZIDNI ============ -->
 <section class="why-zidni" aria-label="Why Zidni">
   <div class="wz-container">
-    <div class="wz-header">
-      <div class="wz-accent-bar"></div>
-      <span class="wz-eyebrow">The Zidni Way</span>
-      <h2 class="wz-headline">One Platform. Every Answer.</h2>
-      <p class="wz-sub">Zidni doesn't just store your data — it tells your team exactly what to do next, every single day.</p>
+    <div class="section-head centered wz-header">
+      <span class="eyebrow tone-indigo">The Zidni Way</span>
+      <h2>One Platform. Every Answer.</h2>
+      <p>Zidni doesn't just store your data — it tells your team exactly what to do next, every single day.</p>
     </div>
 
     <div class="wz-grid">
       <div class="wz-card featured">
         <div class="wz-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg></div>
-        <div>
-          <span class="wz-title">AI-Guided Daily Work</span>
-          <p class="wz-desc">Every agent opens the day to a ready-made Calling Queue — who to call, why, and what's overdue. No guessing, no wasted mornings.</p>
-        </div>
+        <div><span class="wz-title">AI-Guided Daily Work</span><p class="wz-desc">Every agent opens the day to a ready-made Calling Queue — who to call, why, and what's overdue.</p></div>
       </div>
       <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+        <div class="wz-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
         <span class="wz-title">Mobile-First Workflow</span>
-        <span class="wz-desc">Built for agents on the move — full calling, follow-up, and payment tools in your pocket.</span>
+        <span class="wz-desc">Full calling, follow-up, and payment tools in your pocket.</span>
       </div>
       <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
+        <div class="wz-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></div>
         <span class="wz-title">Shared Lead Pool</span>
-        <span class="wz-desc">Unclaimed leads sit in a live pool — first agent to act, claims it. No lead sits idle.</span>
+        <span class="wz-desc">Unclaimed leads sit in a live pool — first agent to act, claims it.</span>
       </div>
       <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <div class="wz-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
         <span class="wz-title">Unified Sales &amp; Recovery</span>
-        <span class="wz-desc">Track a lead from first call to final payment — sales and installment recovery in one pipeline.</span>
+        <span class="wz-desc">Sales and installment recovery in one pipeline.</span>
       </div>
       <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg></div>
+        <div class="wz-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg></div>
         <span class="wz-title">Members Module</span>
-        <span class="wz-desc">Every member's plot, outstanding balance, and payment history — always at hand.</span>
+        <span class="wz-desc">Every member's plot, balance and payment history — always at hand.</span>
       </div>
       <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div>
+        <div class="wz-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div>
         <span class="wz-title">Command Center</span>
-        <span class="wz-desc">One dashboard flags agents behind target, overdue follow-ups, and stalled deals — before they become problems.</span>
-      </div>
-      <div class="wz-card">
-        <div class="wz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-        <span class="wz-title">Multi-Tenant Platform</span>
-        <span class="wz-desc">Built to scale from a single office to multiple agencies, securely isolated.</span>
+        <span class="wz-desc">Flags agents behind target and stalled deals before they become problems.</span>
       </div>
     </div>
   </div>
@@ -668,44 +561,29 @@
 <section class="calling-queue" aria-label="Calling Queue">
   <div class="cq-container">
     <div class="cq-content">
-      <span class="cq-eyebrow">Calling Queue</span>
-      <h2 class="cq-headline">Never Wonder Who to Call Next</h2>
+      <span class="eyebrow tone-indigo">Calling Queue</span>
+      <h2 style="font-size:30px; font-weight:700; letter-spacing:-0.025em; line-height:1.2; margin-bottom:16px;">Never Wonder Who to Call Next</h2>
       <p class="cq-sub">Every morning, Zidni builds each agent's queue automatically — prioritized by urgency, so nothing important waits.</p>
 
       <div class="cq-benefits">
-        <div class="cq-benefit">
-          <div class="cq-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="cq-benefit-text"><strong>One tap to call or WhatsApp</strong><span>No switching apps — reach out directly from the queue.</span></div>
-        </div>
-        <div class="cq-benefit">
-          <div class="cq-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="cq-benefit-text"><strong>Log outcomes instantly</strong><span>Mark how the call went — the next follow-up sets itself.</span></div>
-        </div>
-        <div class="cq-benefit">
-          <div class="cq-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="cq-benefit-text"><strong>Record payments on the spot</strong><span>Update outstanding balances without leaving the call screen.</span></div>
-        </div>
+        <div class="cq-benefit"><div class="cq-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="cq-benefit-text"><strong>One tap to call or WhatsApp</strong><span>No switching apps — reach out directly from the queue.</span></div></div>
+        <div class="cq-benefit"><div class="cq-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="cq-benefit-text"><strong>Log outcomes instantly</strong><span>Mark how the call went — the next follow-up sets itself.</span></div></div>
+        <div class="cq-benefit"><div class="cq-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="cq-benefit-text"><strong>Record payments on the spot</strong><span>Update outstanding balances without leaving the call screen.</span></div></div>
       </div>
 
       <a href="#" class="btn-primary">Request Demo</a>
     </div>
 
     <div class="cq-mockup" role="img" aria-label="Calling queue screen mockup showing a member's outstanding balance, call button, and call outcome options">
-      <span class="cq-mock-badge">CALLING QUEUE — Member</span>
+      <span class="cq-mock-badge">CALLING QUEUE — MEMBER</span>
       <div class="cq-mock-card">
         <div class="cq-mock-name">Ali Hassan</div>
         <div class="cq-mock-id">04-A-112</div>
         <div class="cq-mock-outstanding-label">Outstanding</div>
-        <div class="cq-mock-outstanding">PKR 1,240,000</div>
+        <div class="cq-mock-outstanding num">PKR 1,240,000</div>
       </div>
-      <div class="cq-mock-call-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-        Call 0300•••••12
-      </div>
-      <div class="cq-mock-secondary-row">
-        <div class="cq-mock-secondary-btn">WhatsApp</div>
-        <div class="cq-mock-secondary-btn">Record Payment</div>
-      </div>
+      <div class="cq-mock-call-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-11.8 7.8L3 21l1.7-6.2A8.5 8.5 0 1 1 21 11.5Z"/></svg>Call 0300•••••12</div>
+      <div class="cq-mock-secondary-row"><div class="cq-mock-secondary-btn">WhatsApp</div><div class="cq-mock-secondary-btn">Record Payment</div></div>
       <div class="cq-mock-disposition-label">How did it go?</div>
       <div class="cq-mock-chip-row">
         <span class="cq-mock-chip active">Interested</span>
@@ -721,23 +599,14 @@
 <section class="lead-pool" aria-label="Shared Lead Pool">
   <div class="lp-container">
     <div class="lp-content">
-      <span class="lp-eyebrow">Shared Lead Pool</span>
-      <h2 class="lp-headline">No Lead Waits Longer Than It Should</h2>
+      <span class="eyebrow tone-indigo">Shared Lead Pool</span>
+      <h2 style="font-size:30px; font-weight:700; letter-spacing:-0.025em; line-height:1.2; margin-bottom:16px;">No Lead Waits Longer Than It Should</h2>
       <p class="lp-sub">Unclaimed leads land in a live, shared pool. The fastest agent claims it — so nothing sits untouched while a buyer waits.</p>
 
       <div class="lp-benefits">
-        <div class="lp-benefit">
-          <div class="lp-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="lp-benefit-text"><strong>First-come, first-claimed</strong><span>Agents claim leads in real time — fair, fast, and transparent.</span></div>
-        </div>
-        <div class="lp-benefit">
-          <div class="lp-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="lp-benefit-text"><strong>Auto-recycling</strong><span>Leads with no activity for too long return to the pool automatically.</span></div>
-        </div>
-        <div class="lp-benefit">
-          <div class="lp-benefit-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <div class="lp-benefit-text"><strong>Zero idle leads</strong><span>Managers see pool wait times at a glance — nothing goes cold unnoticed.</span></div>
-        </div>
+        <div class="lp-benefit"><div class="lp-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="lp-benefit-text"><strong>First-come, first-claimed</strong><span>Agents claim leads in real time — fair, fast, and transparent.</span></div></div>
+        <div class="lp-benefit"><div class="lp-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="lp-benefit-text"><strong>Auto-recycling</strong><span>Leads with no activity for too long return to the pool automatically.</span></div></div>
+        <div class="lp-benefit"><div class="lp-benefit-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="lp-benefit-text"><strong>Zero idle leads</strong><span>Managers see pool wait times at a glance — nothing goes cold unnoticed.</span></div></div>
       </div>
 
       <a href="#" class="btn-primary">Request Demo</a>
@@ -745,10 +614,7 @@
 
     <div class="lp-mockup-order">
       <div class="lp-mockup" role="img" aria-label="Shared lead pool screen mockup showing unclaimed leads with claim buttons and a live status indicator">
-        <div class="lp-mock-header">
-          <div><div class="lp-mock-title">Lead Pool</div><div class="lp-mock-sub">3 unclaimed leads</div></div>
-          <div class="lp-live"><span class="lp-live-dot"></span>LIVE</div>
-        </div>
+        <div class="lp-mock-header"><div><div class="lp-mock-title">Lead Pool</div><div class="lp-mock-sub">3 unclaimed leads</div></div><div class="lp-live"><span class="lp-live-dot"></span>LIVE</div></div>
         <div class="lp-mock-card"><div><div class="lp-lead-name">Sara Khan</div><div class="lp-lead-meta">Facebook · New Metro City</div></div><div class="lp-claim-btn">Claim</div></div>
         <div class="lp-mock-card"><div><div class="lp-lead-name">Bilal Ahmed</div><div class="lp-lead-meta">Website · Waiting 4 min</div></div><div class="lp-claim-btn">Claim</div></div>
         <div class="lp-mock-card"><div><div class="lp-lead-name">Hina Tariq</div><div class="lp-lead-meta">Referral · New</div></div><div class="lp-claim-btn">Claim</div></div>
